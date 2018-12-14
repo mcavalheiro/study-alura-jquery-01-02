@@ -15,3 +15,19 @@ campoDigitacao.on('input', function(){
     $('#contador-caracteres').text(qtdCaracteres);
 
 });
+
+var tempoRestante = $('#tempo-digitacao').text();
+campoDigitacao.one('focus', function(){
+    
+    var cronometroId = setInterval(function(){
+        tempoRestante--;
+        $('#tempo-digitacao').text(tempoRestante);
+        if(tempoRestante < 1){
+            campoDigitacao.attr('disabled', true);
+            clearInterval(cronometroId);
+        }
+    },1000);
+
+
+    //console.log('Ah danado! Não clicou né? Mas te peguei mesmo assim!');
+});
